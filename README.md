@@ -26,3 +26,8 @@ I used OLED 0.96 128x64 and libreries were:
 ![](img/tools_options.png)
 
 I connected display to 3.3V and GND with SCL and SDA 
+
+Post on: 
+
+http://ip_address/post/
+with raw body and just text
