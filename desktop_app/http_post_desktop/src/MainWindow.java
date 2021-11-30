@@ -7,6 +7,17 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JOptionPane;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JTextArea;
+import javax.swing.JButton;
+import http.HttpPost;
+
 
 public class MainWindow extends JFrame {
 
@@ -55,8 +66,27 @@ public class MainWindow extends JFrame {
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
+		contentPane.setLayout(null);
 		setContentPane(contentPane);
+		JTextArea txt_area = new JTextArea();
+		txt_area.setBounds(12, 12, 290, 179);
+		contentPane.add(txt_area);
+		
+		JButton btnSubmit = new JButton("Submit");
+		btnSubmit.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String mes = txt_area.getText();
+				System.out.println("Hello, World!");
+			HttpPost p = new HttpPost();
+			p.sendPost(mes);
+				
+			}
+			
+		});
+		btnSubmit.setBounds(311, 26, 117, 25);
+		contentPane.add(btnSubmit);
 	}
 
 }
