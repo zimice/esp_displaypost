@@ -1,7 +1,5 @@
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -17,37 +15,29 @@ import java.awt.event.ActionListener;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 import http.HttpPost;
+import url.urlParser;
 
 
 public class MainWindow extends JFrame {
 
 	private JPanel contentPane;
-
-	public static boolean isValidIPAddress(String ip) {
-
-		String zeroTo255 = "(\\d{1,2}|(0|1)\\" + "d{2}|2[0-4]\\d|25[0-5])";
-		String regex = zeroTo255 + "\\." + zeroTo255 + "\\." + zeroTo255 + "\\." + zeroTo255;
-
-		Pattern p = Pattern.compile(regex);
-		if (ip == null) {
-			return false;
-		}
-		Matcher m = p.matcher(ip);
-		return m.matches();
-	}
+	private static String url;
+	
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					String ip=null;
-					while(ip ==null) {
-					 ip = JOptionPane.showInputDialog("Enter a path");
-					 System.out.println(isValidIPAddress(ip));
-					 if(!isValidIPAddress(ip)) {
-						 ip = null;
-					 	JOptionPane.showMessageDialog(null,"Wrong format of ip address.Example: 10.10.1.1");
+					String input_url=null;
+					while(input_url ==null) {
+					 input_url = JOptionPane.showInputDialog("Enter a path");
+					 System.out.println(urlParser.isValidinput_urlAddress(input_url));
+					 if(!urlParser.isValidinput_urlAddress(input_url)) {
+						 input_url = null;
+					 	JOptionPane.showMessageDialog(null,"Wrong format of input_url address.Example: 10.10.1.1");
 					 }
+					 url = input_url;
+
 					}
 					MainWindow frame = new MainWindow();
 					frame.setVisible(true);
@@ -77,8 +67,7 @@ public class MainWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String mes = txt_area.getText();
-				System.out.println("Hello, World!");
+			String mes = txt_area.getText();
 			HttpPost p = new HttpPost();
 			p.sendPost(mes);
 				
