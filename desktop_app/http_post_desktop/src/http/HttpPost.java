@@ -11,7 +11,8 @@ import java.sql.Date;
 
 public class HttpPost {
 
-	private String url = "http://localhost:8888/post";
+	private final String DEFAULT_URL= "http://localhost:8888/post";
+	private String url ;
 	private HttpURLConnection con;
 
 	private void createConnection() {
@@ -88,6 +89,9 @@ public class HttpPost {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	public String getDefaultURL(){
+		return DEFAULT_URL;
 	}
 
 	private void setBody(String body) {

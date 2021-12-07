@@ -22,6 +22,7 @@ public class MainWindow extends JFrame {
 
 	private JPanel contentPane;
 	private static String url;
+	private static HttpPost post = new HttpPost();
 	
 
 	public static void main(String[] args) {
@@ -29,16 +30,22 @@ public class MainWindow extends JFrame {
 			public void run() {
 				try {
 					String input_url=null;
+					boolean is_default=false;
+					
 					while(input_url ==null) {
 					 input_url = JOptionPane.showInputDialog("Enter a path");
 					 System.out.println(urlParser.isValidinput_urlAddress(input_url));
-					 if(!urlParser.isValidinput_urlAddress(input_url)) {
+					 if(!urlParser.isValidinput_urlAddress(input_url) || is_default != true) {
 						 input_url = null;
-					 	JOptionPane.showMessageDialog(null,"Wrong format of input_url address.Example: 10.10.1.1");
+					 	JOptionPane.showMessageDialog(null,"Wrong format of input_url address.Example: 10.10.1.1.If you wish to proceed with default ip press cancle once again.");
+						is_default = true;
+						url = post.getDefaultURL();
 					 }
+					 
 					 url = input_url;
 
 					}
+
 					MainWindow frame = new MainWindow();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -68,8 +75,7 @@ public class MainWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 			String mes = txt_area.getText();
-			HttpPost p = new HttpPost();
-			p.sendPost(mes);
+			post.sendPost(mes);
 				
 			}
 			
